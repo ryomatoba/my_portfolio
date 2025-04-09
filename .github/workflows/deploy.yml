@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+# main ブランチへのプッシュ時にワークフローを実行
+on:
+  push:
+    branches:
+      - main # あなたのデフォルトブランチ名に合わせてください (main または master)
+
+# 環境変数を設定 (ビルドプロセスで PUBLIC_URL を使うため)
+env:
+  PUBLIC_URL: /my_portfolio # package.json の homepage のパス部分 (末尾のスラッシュは不要)
+
+# 実行するジョブを定義
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 実行環境として Ubuntu の最新版を使用
+
+    # GITHUB_TOKEN の権限を設定 (gh-pages ブランチへの書き込みに必要)
+    permissions:
+      contents: write
+
+    steps:
+      # ステップ1: リポジトリのコードをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v4 # 公式のアクションを使用
+
+      # ステップ2: Node.js 環境をセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # または '20' など、プロジェクトで使用しているバージョンを指定
+          cache: 'npm' # npm のキャッシュを有効にする
+
+      # ステップ3: 依存パッケージをインストール
+      # npm ci は package-lock.json に基づいて高速かつ確実にインストールします
+      - name: Install dependencies
+        run: npm ci
+
+      # ステップ4: アプリケーションをビルド
+      # PUBLIC_URL 環境変数がビルドプロセスで使われます
+      - name: Build application
+        run: npm run build
+
+      # ステップ5: GitHub Pages にデプロイ
+      # peaceiris/actions-gh-pages アクションがビルド結果を gh-pages ブランチにプッシュします
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # 自動的に提供されるトークンを使用
+          publish_dir: ./build # デプロイするディレクトリ (ビルド結果)
+          # publish_branch: gh-pages # デプロイ先のブランチ名 (デフォルトは gh-pages)
+          # user_name: 'github-actions[bot]' # コミットするユーザー名 (オプション)
+          # user_email: 'github-actions[bot]@users.noreply.github.com' # コミットするメールアドレス (オプション)
+          # commit_message: 'Deploy to GitHub Pages' # コミットメッセージ (オプション)

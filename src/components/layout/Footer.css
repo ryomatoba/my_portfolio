@@ -1,0 +1,19 @@
+.footer {
+    padding: 2rem 0;
+    background-color: #f8f9fa;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .copyright {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .dark-mode .footer {
+    background-color: #1e1e1e;
+  }
+  
+  .dark-mode .copyright {
+    color: #b0b0b0;
+  }

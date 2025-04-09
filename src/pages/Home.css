@@ -1,0 +1,107 @@
+.home-page {
+    padding-top: 0;
+  }
+  
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  .hero-content {
+    max-width: 800px;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero .subtitle {
+    font-size: 1.5rem;
+    color: #ff7f50;
+    margin-bottom: 1rem;
+  }
+  
+  .section {
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  
+  .section-gray {
+    background-color: #f8f9fa;
+  }
+  
+  .section-title {
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #ff7f50;
+    margin: 0.5rem auto 0;
+  }
+  
+  .about-preview, 
+  .featured-projects-placeholder,
+  .skills-placeholder {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+  }
+  
+  .cta-container {
+    margin-top: 2rem;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: #2a6496;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #1a4c78;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-accent {
+    background-color: #ff7f50;
+  }
+  
+  .btn-accent:hover {
+    background-color: #e56a3d;
+  }
+  
+  .contact-text {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero .subtitle {
+      font-size: 1.2rem;
+    }
+    
+    .section {
+      padding: 3rem 1rem;
+    }
+  }

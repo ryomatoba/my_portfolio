@@ -1,0 +1,29 @@
+.skill-item {
+    margin-bottom: var(--space-md);
+  }
+  
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-xs);
+  }
+  
+  .skill-name {
+    font-weight: 500;
+  }
+  
+  .skill-level {
+    color: var(--color-text-light);
+  }
+  
+  .skill-bar {
+    height: 8px;
+    background-color: var(--color-background-dark);
+    border-radius: var(--border-radius-full);
+    overflow: hidden;
+  }
+  
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: var(--border-radius-full);
+  }

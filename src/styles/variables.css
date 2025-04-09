@@ -1,0 +1,102 @@
+:root {
+    /* カラーパレット */
+    --color-primary: #2a6496;
+    --color-primary-light: #3a7db7;
+    --color-primary-dark: #1a4c78;
+    
+    --color-accent: #ff7f50;
+    --color-accent-light: #ff9f70;
+    --color-accent-dark: #e56a3d;
+    
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-text-lighter: #888888;
+    
+    --color-background: #ffffff;
+    --color-background-alt: #f8f9fa;
+    --color-background-dark: #f1f3f5;
+    
+    --color-border: #dddddd;
+    --color-border-light: #eeeeee;
+    
+    /* ダークモード用カラー */
+    --dark-color-text: #e1e1e1;
+    --dark-color-text-light: #b0b0b0;
+    --dark-color-background: #121212;
+    --dark-color-background-alt: #1e1e1e;
+    --dark-color-background-dark: #2d2d2d;
+    --dark-color-border: #444444;
+    
+    /* スペーシング */
+    --space-xs: 0.25rem;  /* 4px */
+    --space-sm: 0.5rem;   /* 8px */
+    --space-md: 1rem;     /* 16px */
+    --space-lg: 1.5rem;   /* 24px */
+    --space-xl: 2rem;     /* 32px */
+    --space-xxl: 3rem;    /* 48px */
+    
+    /* フォント */
+    --font-family-base: 'Noto Sans JP', sans-serif;
+    --font-family-heading: 'Noto Sans JP', sans-serif;
+    
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-md: 1rem;       /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-xxl: 1.5rem;    /* 24px */
+    --font-size-xxxl: 2rem;     /* 32px */
+    --font-size-hero: 3rem;     /* 48px */
+    
+    /* ブレイクポイント */
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    
+    /* Z-index レイヤー */
+    --z-index-dropdown: 1000;
+    --z-index-sticky: 1020;
+    --z-index-fixed: 1030;
+    --z-index-modal: 1050;
+    --z-index-popover: 1060;
+    --z-index-tooltip: 1070;
+    
+    /* トランジション */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* ボーダーラディウス */
+    --border-radius-sm: 0.25rem;  /* 4px */
+    --border-radius-md: 0.5rem;   /* 8px */
+    --border-radius-lg: 1rem;     /* 16px */
+    --border-radius-full: 9999px;
+    
+    /* シャドウ */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ダークモード設定 */
+  .dark-mode {
+    --color-text: var(--dark-color-text);
+    --color-text-light: var(--dark-color-text-light);
+    --color-background: var(--dark-color-background);
+    --color-background-alt: var(--dark-color-background-alt);
+    --color-background-dark: var(--dark-color-background-dark);
+    --color-border: var(--dark-color-border);
+  }
+  
+  /* メディアクエリミックスイン風の変数 */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light-mode) {
+      --color-text: var(--dark-color-text);
+      --color-text-light: var(--dark-color-text-light);
+      --color-background: var(--dark-color-background);
+      --color-background-alt: var(--dark-color-background-alt);
+      --color-background-dark: var(--dark-color-background-dark);
+      --color-border: var(--dark-color-border);
+    }
+  }
