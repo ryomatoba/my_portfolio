@@ -47,7 +47,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # 自動的に提供されるトークンを使用
-          publish_dir: ./build # デプロイするディレクトリ (ビルド結果)
+          publish_dir: ./dist # デプロイするディレクトリ (ビルド結果)
           # publish_branch: gh-pages # デプロイ先のブランチ名 (デフォルトは gh-pages)
           # user_name: 'github-actions[bot]' # コミットするユーザー名 (オプション)
           # user_email: 'github-actions[bot]@users.noreply.github.com' # コミットするメールアドレス (オプション)
