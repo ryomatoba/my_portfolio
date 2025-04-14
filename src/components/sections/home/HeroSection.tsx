@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiArrowDown } from 'react-icons/fi';
+import heroIcon from '/public/images/Icon.png'; // Import the icon image
 
 export default function HeroSection() {
   return (
@@ -52,10 +53,7 @@ export default function HeroSection() {
               <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-primary-accent bg-opacity-20 dark:bg-opacity-10 flex items-center justify-center">
                 <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-primary-accent bg-opacity-50 dark:bg-opacity-20 flex items-center justify-center">
                   <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden border-4 border-white dark:border-gray-700">
-                    {/* Profile image would go here */}
-                    <div className="w-full h-full flex items-center justify-center bg-secondary-purple bg-opacity-20 dark:bg-opacity-40 text-4xl md:text-5xl font-bold">
-                      R
-                    </div>
+                    <img src={heroIcon} alt="アイコン" className="w-full h-full object-cover" /> {/* Use the imported variable */}
                   </div>
                 </div>
               </div>

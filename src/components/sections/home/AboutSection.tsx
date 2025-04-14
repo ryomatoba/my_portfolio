@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiUser, FiBriefcase, FiCode, FiAward, FiTrendingUp } from 'react-icons/fi'; // アイコンを変更
+import profileImage from '/public/images/Profile.png'; // Import the profile image
 
 export default function AboutSection() {
   return (
@@ -28,9 +29,7 @@ export default function AboutSection() {
               <div className="absolute -inset-2 bg-primary-accent bg-opacity-20 dark:bg-opacity-10 rounded-lg transform rotate-3" />
               <div className="relative rounded-lg overflow-hidden shadow-xl bg-white dark:bg-gray-800 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
                 <div className="aspect-square w-64 md:w-80 flex items-center justify-center bg-secondary-purple bg-opacity-20 dark:bg-opacity-40">
-                  {/* Profile image - Replace with your actual image */}
-                  {/* <img src="/images/profile.jpg" alt="的場 陵" className="w-full h-full object-cover" /> */}
-                  <span className="text-6xl font-bold">R</span>
+                  <img src={profileImage} alt="的場 陵 プロフィール写真" className="w-full h-full object-cover" /> {/* Use the imported variable */}
                 </div>
               </div>
             </div>
