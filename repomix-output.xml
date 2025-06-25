@@ -1,0 +1,1877 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.github/
+  workflows/
+    deploy.yml
+public/
+  _redirects
+src/
+  components/
+    layout/
+      Footer.tsx
+      Header.tsx
+      Layout.tsx
+    sections/
+      home/
+        AboutSection.tsx
+        ContactSection.tsx
+        HeroSection.tsx
+        PortfolioSection.tsx
+        SkillsSection.tsx
+  context/
+    ThemeContext.tsx
+  data/
+    projects.ts
+  pages/
+    HomePage.tsx
+    PortfolioDetail.tsx
+  App.tsx
+  index.css
+  main.tsx
+  vite-env.d.ts
+.gitignore
+biome.json
+index.html
+package.json
+postcss.config.js
+README.md
+tailwind.config.js
+tsconfig.json
+tsconfig.tsbuildinfo
+vite.config.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="public/_redirects">
+LyogICAgL2luZGV4Lmh0bWwgICAyMDAK
+</file>
+
+<file path="src/components/layout/Footer.tsx">
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-gray-100 dark:bg-gray-900 py-8">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0">
+            <p className="text-gray-600 dark:text-gray-400">
+              © {currentYear} 的場 陵. All Rights Reserved.
+            </p>
+          </div>
+
+          <div className="flex space-x-4">
+            {/* あなたのGitHubプロフィールURLに修正 */}
+            <a
+              href="https://github.com/ryomatoba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400 hover:text-primary-accent dark:hover:text-primary-accent transition-colors"
+              aria-label="GitHub"
+            >
+              <FiGithub size={24} />
+            </a>
+             {/* あなたのLinkedInプロフィールURLに修正 (なければ削除) */}
+            <a
+              href="https://www.linkedin.com/in/ryo-matoba-a49197360" // あなたのLinkedIn URLに置き換える
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400 hover:text-primary-accent dark:hover:text-primary-accent transition-colors"
+              aria-label="LinkedIn"
+            >
+              <FiLinkedin size={24} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+</file>
+
+<file path="src/components/layout/Header.tsx">
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { useTheme } from '../../context/ThemeContext';
+
+const navItems = [
+  { label: 'PROFILE', href: '#profile' },
+  { label: 'SKILL', href: '#skill' },
+  { label: 'PORTFOLIO', href: '#portfolio' },
+  { label: 'CONTACT', href: '#contact' },
+];
+
+export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { darkMode, toggleDarkMode } = useTheme();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white bg-opacity-95 shadow-md dark:bg-primary-dark dark:bg-opacity-95'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto flex justify-between items-center h-[var(--header-height)]">
+        <Link to="/" className="text-xl font-bold">
+          的場 陵
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:block">
+          <ul className="flex space-x-6">
+            {navItems.map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  className="nav-link font-medium text-primary-dark dark:text-primary-light hover:text-primary-accent dark:hover:text-primary-accent py-2"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex items-center space-x-4">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="block md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            onClick={toggleMobileMenu}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <motion.div
+        className="fixed inset-0 bg-white dark:bg-primary-dark z-40 pt-20 px-6 md:hidden"
+        initial={{ x: '100%' }}
+        animate={{ x: mobileMenuOpen ? 0 : '100%' }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+      >
+        <nav className="hidden md:block">
+          <ul className="flex space-x-6">
+            {navItems.map((item) => ( 
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  className="nav-link font-medium text-primary-dark dark:text-primary-light hover:text-primary-accent dark:hover:text-primary-accent py-2"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </motion.div>
+    </header>
+  );
+}
+</file>
+
+<file path="src/components/layout/Layout.tsx">
+import type { ReactNode } from 'react';
+import Header from './Header';
+import Footer from './Footer';
+
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-grow main-container">
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/sections/home/ContactSection.tsx">
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FiSend, FiMail, FiUser, FiMessageSquare } from 'react-icons/fi';
+
+export default function ContactSection() {
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mpwpbged', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormState({ name: '', email: '', message: '' });
+      } else {
+        // Try to parse the error message from Formspree if available
+        const data = await response.json();
+        if (data.errors && data.errors.length > 0) {
+          setError(`送信エラー: ${data.errors.map((e: { message: string }) => e.message).join(', ')}`);
+        } else {
+          setError('メッセージの送信に失敗しました。後でもう一度お試しください。');
+        }
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setError('メッセージの送信中に予期せぬエラーが発生しました。');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <div className="container mx-auto px-4">
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          CONTACT
+        </motion.h2>
+
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              お仕事のご依頼やご質問など、お気軽にご連絡ください。
+            </p>
+          </motion.div>
+
+          {isSubmitted ? (
+            <motion.div
+              className="bg-white dark:bg-gray-900 rounded-lg p-8 shadow-md text-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full mb-6">
+                <FiSend className="text-green-500 dark:text-green-300 text-2xl" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">メッセージを送信しました</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                お問い合わせありがとうございます。近日中にご返信いたします。
+              </p>
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="btn btn-primary"
+              >
+                新しいメッセージを送る
+              </button>
+            </motion.div>
+          ) : (
+            <motion.form
+              onSubmit={handleSubmit}
+              className="bg-white dark:bg-gray-900 rounded-lg p-8 shadow-md"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              {error && (
+                <div className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 text-red-600 dark:text-red-400 p-4 rounded-md mb-6">
+                  {error}
+                </div>
+              )}
+
+              <div className="mb-6">
+                <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center">
+                  <FiUser className="mr-2" />
+                  <span>お名前 <span className="text-red-500">*</span></span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formState.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-accent focus:border-transparent transition-colors"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center">
+                  <FiMail className="mr-2" />
+                  <span>メールアドレス <span className="text-red-500">*</span></span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-accent focus:border-transparent transition-colors"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center">
+                  <FiMessageSquare className="mr-2" />
+                  <span>メッセージ <span className="text-red-500">*</span></span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formState.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-accent focus:border-transparent transition-colors"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn btn-primary w-full flex items-center justify-center"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    送信中...
+                  </>
+                ) : (
+                  <>
+                    <FiSend className="mr-2" />
+                    メッセージを送信
+                  </>
+                )}
+              </button>
+            </motion.form>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="src/components/sections/home/PortfolioSection.tsx">
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { FiChevronRight } from 'react-icons/fi';
+import { projectsData, type Project } from '../../../data/projects'; // さらに正しい相対パスに修正
+
+// ローカルのProjectインターフェース定義を削除 (インポートしたものを使用)
+
+// ProjectCardPropsから不要なものを削除し、idを追加
+interface ProjectCardProps {
+  project: Project; // Project型を使用
+  index: number;
+}
+
+// ProjectCardコンポーネントをLinkでラップし、内容を調整
+const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const { id, title, description, image, tags } = project;
+
+  return (
+    <motion.div
+      className="h-full" // 高さを揃えるため
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      {/* Linkコンポーネントでカード全体をラップ */}
+      <Link to={`/portfolio/${id}`} className="block bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+        {/* Image Area */}
+        <div className="relative h-40 bg-gray-100 dark:bg-gray-700 flex-shrink-0">
+          {image ? (
+            <img src={image} alt={title} className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-primary-accent bg-opacity-10 dark:bg-opacity-20">
+              <span className="text-sm font-semibold text-primary-accent opacity-50">Image Coming Soon</span>
+            </div>
+          )}
+        </div>
+
+        {/* Content Area */}
+        <div className="p-4 flex flex-col flex-grow">
+          <h3 className="text-md font-bold mb-1">{title}</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-xs mb-2 flex-grow">{description}</p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1 mb-3">
+            {tags.slice(0, 3).map((tag: string) => ( // tagにstring型を指定
+              <span key={tag} className="bg-secondary-purple bg-opacity-20 dark:bg-opacity-30 text-secondary-purple dark:text-purple-300 px-1.5 py-0.5 text-[10px] rounded-full">
+                {tag}
+              </span>
+            ))}
+            {tags.length > 3 && (
+                <span className="text-gray-400 text-[10px] self-center">...</span>
+            )}
+          </div>
+
+          {/* 詳細を見るリンク */}
+          <div className="mt-auto text-right text-primary-accent text-xs font-medium flex items-center justify-end">
+            詳細を見る <FiChevronRight className="ml-1" />
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
+
+
+export default function PortfolioSection() {
+  // ----- projects 配列の定義を削除 -----
+
+  return (
+    <section id="portfolio" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <div className="container mx-auto px-4">
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          PORTFOLIO
+        </motion.h2>
+        <motion.p
+          className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-xl mx-auto" // 中央揃え、マージン、最大幅を追加
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, delay: 0.1 }} // h2より少し遅延
+        >
+          制作物一覧です。インターンシップやハッカソン、個人開発で作成したアプリケーションを紹介します。
+        </motion.p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* インポートした projectsData を使用 */}
+          {projectsData.map((project: Project, index: number) => ( // projectとindexに型を指定
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="src/components/sections/home/SkillsSection.tsx">
+import { motion } from 'framer-motion';
+import {
+  FaPython, FaReact, FaJsSquare, FaHtml5, FaCss3Alt, FaJava,
+  FaAws, FaGoogle, FaDocker, FaDatabase, FaGitAlt
+} from 'react-icons/fa';
+import { SiFlask, SiTypescript, SiMysql, SiAmazondynamodb } from 'react-icons/si';
+
+type SkillCardProps = {
+  icon: React.ReactNode;
+  title: string;
+  // level?: number; // <--- 削除
+  detail: string;
+  index: number;
+};
+
+// SkillCardコンポーネントからレベル表示を削除
+const SkillCard = ({ icon, title, detail, index }: SkillCardProps) => {
+  return (
+    <motion.div
+      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col items-center text-center space-y-3 h-full" // h-full追加
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <div className="text-4xl text-primary-accent mb-2">
+        {icon}
+      </div>
+      <h3 className="text-lg font-bold">{title}</h3>
+
+      {/* ----- 習熟度バーとパーセンテージ表示を削除 ----- */}
+      {/*
+      {level && (
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-2">
+          <motion.div
+            className="bg-primary-accent h-2.5 rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: `${level}%` }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
+          />
+        </div>
+      )}
+      <p className="text-xs text-primary-accent">{level}%</p>
+      */}
+      {/* ----- 削除ここまで ----- */}
+
+      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1 flex-grow">
+        {detail}
+      </p>
+    </motion.div>
+  );
+};
+
+export default function SkillsSection() {
+  // スキルデータから level を削除
+  const backendSkills = [
+    { icon: <FaPython />, title: 'Python', detail: 'FlaskでのWeb API開発、AWS Lambda関数開発に使用' },
+    { icon: <SiFlask />, title: 'Flask', detail: 'インターンでのWebアプリケーションバックエンド開発' },
+    { icon: <FaJava />, title: 'Java', detail: '授業や基本情報技術者試験での学習経験' },
+    { icon: <FaDatabase />, title: 'Database', detail: 'SQL (MySQL/Cloud SQL), NoSQL (DynamoDB)' },
+  ];
+
+  const frontendSkills = [
+    { icon: <FaReact />, title: 'React', detail: 'インターン/ハッカソンでのフロントエンド開発、フックAPI中心' },
+    { icon: <FaJsSquare />, title: 'JavaScript', detail: 'ES6+構文、非同期処理、DOM操作' },
+    { icon: <SiTypescript />, title: 'TypeScript', detail: '基本的な型定義、Reactとの組み合わせ学習中' },
+    { icon: <FaHtml5 />, title: 'HTML5', detail: 'セマンティックマークアップ、アクセシビリティ考慮' },
+    { icon: <FaCss3Alt />, title: 'CSS3', detail: 'Tailwind CSS, Flexbox/Gridレイアウト, レスポンシブデザイン' },
+  ];
+
+  const infraCloudSkills = [
+    { icon: <FaGoogle />, title: 'GCP', level: 75, detail: 'Cloud Run, Cloud SQL, Storage, Firebase Auth を用いたアプリ開発・デプロイ経験' },
+    { icon: <FaAws />, title: 'AWS', level: 65, detail: 'Lambda, DynamoDB, API Gateway を用いたハッカソン開発経験, ECR利用経験' },
+    { icon: <FaDocker />, title: 'Docker', level: 70, detail: 'コンテナ環境構築、Dockerfile作成、インターンでの開発/デプロイに活用' },
+    { icon: <FaGitAlt />, title: 'CI/CD', level: 65, detail: 'GitHub Actions を用いたビルド・テスト・デプロイ自動化パイプライン構築経験' },
+  ];
+
+   const otherSkills = [
+      { icon: <FaGitAlt />, title: 'Git/GitHub', detail: 'バージョン管理、ブランチ戦略、チーム開発での利用経験' },
+      // { icon: <FiAward />, title: '基本情報技術者', detail: '2回生秋に取得。基礎知識の証明' },
+  ]
+
+  // ... (残りの SkillsSection コードは変更なし)
+  return (
+    <section id="skill" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <div className="container mx-auto px-4">
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          SKILL
+        </motion.h2>
+
+        <div className="space-y-12">
+          {/* Backend */}
+          <div>
+            <motion.h3 className="text-2xl font-bold mb-6 pl-4 border-l-4 border-primary-accent" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }}>
+              BACK-END
+            </motion.h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {backendSkills.map((skill, index) => (
+                <SkillCard key={skill.title} {...skill} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* Frontend */}
+          <div>
+            <motion.h3 className="text-2xl font-bold mb-6 pl-4 border-l-4 border-primary-accent" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }}>
+              FRONT-END
+            </motion.h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6"> {/* md:grid-cols-5に変更 */}
+              {frontendSkills.map((skill, index) => (
+                <SkillCard key={skill.title} {...skill} index={index + backendSkills.length} />
+              ))}
+            </div>
+          </div>
+
+          {/* Infra/Cloud */}
+          <div>
+            <motion.h3 className="text-2xl font-bold mb-6 pl-4 border-l-4 border-primary-accent" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }}>
+              INFRA / CLOUD / DevOps
+            </motion.h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {infraCloudSkills.map((skill, index) => (
+                <SkillCard key={skill.title} {...skill} index={index + backendSkills.length + frontendSkills.length} />
+              ))}
+            </div>
+          </div>
+
+           {/* Others */}
+           <div>
+             <motion.h3 className="text-2xl font-bold mb-6 pl-4 border-l-4 border-primary-accent" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }}>
+               OTHER TOOLS
+             </motion.h3>
+             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"> {/* md:grid-cols-4に変更 */}
+               {otherSkills.map((skill, index) => (
+                 <SkillCard key={skill.title} {...skill} index={index + backendSkills.length + frontendSkills.length + infraCloudSkills.length} />
+               ))}
+             </div>
+           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="src/context/ThemeContext.tsx">
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+
+type ThemeContextType = {
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+};
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Load the theme preference from localStorage on mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+
+    if (savedMode) {
+      setDarkMode(JSON.parse(savedMode));
+    } else {
+      // Check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(prefersDark);
+    }
+  }, []);
+
+  // Update localStorage and document class when dark mode changes
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    document.documentElement.classList.toggle('dark', darkMode);
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// Hook to use the theme context
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+}
+</file>
+
+<file path="src/pages/HomePage.tsx">
+// src/pages/HomePage.tsx (新規作成)
+import HeroSection from "../components/sections/home/HeroSection";
+import AboutSection from "../components/sections/home/AboutSection";
+import SkillsSection from "../components/sections/home/SkillsSection";
+import PortfolioSection from "../components/sections/home/PortfolioSection";
+import ContactSection from "../components/sections/home/ContactSection";
+
+export default function HomePage() {
+    return (
+        <>
+            <HeroSection />
+            <AboutSection />
+            <SkillsSection />
+            <PortfolioSection />
+            <ContactSection />
+        </>
+    );
+}
+</file>
+
+<file path="src/pages/PortfolioDetail.tsx">
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { FiArrowLeft, FiGithub, FiExternalLink } from 'react-icons/fi';
+import { projectsData, type Project } from '../data/projects';
+
+export default function PortfolioDetail() {
+  const { projectId } = useParams<{ projectId: string }>();
+  // インポートした projectsData を使用
+  const project = projectsData.find(p => p.id === projectId);
+  
+  if (!project) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-2xl font-bold mb-4">プロジェクトが見つかりません</h1>
+        <Link to="/" className="text-primary-accent hover:underline">
+          ホームに戻る
+        </Link>
+      </div>
+    );
+  }
+
+  const {
+    title,
+    longDescription,
+    image,
+    features,
+    problem,
+    solution,
+    techStackDetails,
+    architectureDiagramUrl,
+    githubUrl,
+    demoUrl
+  } = project;
+
+  return (
+    <div className="container mx-auto px-4 py-12 md:py-16">
+      {/* Back Button */}
+      <Link to="/#portfolio" className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-accent mb-6 text-sm">
+        <FiArrowLeft className="mr-2" />
+        ポートフォリオ一覧に戻る
+      </Link>
+
+      {/* Project Title */}
+      <h1 className="text-3xl md:text-4xl font-bold mb-6">{title}</h1>
+
+      {/* Main Image */}
+      {image && (
+        <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
+          <img src={image} alt={title} className="w-full h-auto" />
+        </div>
+      )}
+
+      {/* External Links */}
+      <div className="flex flex-wrap gap-4 mb-8">
+        {githubUrl && (
+          <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline flex items-center text-sm">
+            <FiGithub className="mr-2" /> GitHub Repository
+          </a>
+        )}
+        {demoUrl && (
+          <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline flex items-center text-sm">
+            <FiExternalLink className="mr-2" /> Live Demo
+          </a>
+        )}
+      </div>
+
+
+      {/* Project Details Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Left Column (Main Description) */}
+        <div className="lg:col-span-2 space-y-6">
+          {longDescription && (
+             <section>
+               <h2 className="detail-section-title">概要</h2>
+               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{longDescription}</p>
+             </section>
+          )}
+           {problem && (
+             <section>
+               <h2 className="detail-section-title">課題</h2>
+               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{problem}</p>
+             </section>
+           )}
+            {solution && (
+             <section>
+               <h2 className="detail-section-title">解決策</h2>
+               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{solution}</p>
+             </section>
+           )}
+        </div>
+
+        {/* Right Column (Side Info) */}
+        <aside className="space-y-6">
+          {features && features.length > 0 && (
+            <section className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+              <h2 className="detail-section-title mb-3">主な機能</h2>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 text-sm space-y-1">
+                {features.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {techStackDetails && techStackDetails.length > 0 && (
+            <section className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+              <h2 className="detail-section-title mb-3">使用技術詳細</h2>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 text-sm space-y-1">
+                {techStackDetails.map((tech, index) => (
+                  <li key={index}>{tech}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {architectureDiagramUrl && (
+             <section className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+               <h2 className="detail-section-title mb-3">構成図</h2>
+               <img src={architectureDiagramUrl} alt={`${title} 構成図`} className="w-full h-auto rounded" />
+             </section>
+           )}
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+// 詳細ページのセクションタイトルスタイル (index.cssなどに追加)
+// .detail-section-title {
+//   @apply text-xl font-semibold mb-4 border-b pb-2 border-gray-200 dark:border-gray-700;
+// }
+</file>
+
+<file path="src/App.tsx">
+// src/App.tsx (修正)
+import { Routes, Route } from "react-router-dom"; // Routes と Route をインポート
+import { ThemeProvider } from "./context/ThemeContext";
+import Layout from "./components/layout/Layout";
+import HomePage from "./pages/HomePage"; // 作成したHomePageをインポート
+import PortfolioDetail from "./pages/PortfolioDetail.tsx"; // 作成する詳細ページをインポート (.tsx を追加)
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Layout>
+        <Routes> {/* Routesで囲む */}
+          <Route path="/" element={<HomePage />} /> {/* ホームページ */}
+          <Route path="/portfolio/:projectId" element={<PortfolioDetail />} /> {/* 詳細ページ */}
+          {/* 必要に応じて404ページなどを追加 */}
+          <Route path="*" element={<HomePage />} /> {/* Not Found時はホームへ */}
+        </Routes>
+      </Layout>
+    </ThemeProvider>
+  );
+}
+</file>
+
+<file path="src/index.css">
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.5rem;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  --header-height: 70px;
+}
+
+@layer base {
+  body {
+    @apply bg-primary-light text-primary-dark font-sans antialiased dark:bg-primary-dark dark:text-primary-light;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 md:px-8;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-10 text-center relative;
+  }
+
+  .section-title::after {
+    content: '';
+    @apply block w-12 h-1 bg-primary-accent absolute left-1/2 transform -translate-x-1/2 mt-3;
+  }
+
+  .btn {
+    @apply inline-block px-6 py-3 font-medium rounded transition duration-300 ease-in-out text-center;
+  }
+
+  .btn-primary {
+    @apply bg-primary-accent text-white hover:bg-opacity-80;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary-accent text-primary-accent hover:bg-primary-accent hover:text-white;
+  }
+
+  .detail-section-title {
+    @apply text-xl font-semibold mb-4 border-b pb-2 border-gray-200 dark:border-gray-700;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-200 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-accent rounded-full;
+}
+
+/* Animation classes */
+.nav-link {
+  @apply relative;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute left-0 bottom-0 w-0 h-0.5 bg-primary-accent transition-all duration-300;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  @apply w-full;
+}
+
+/* Main container padding for fixed header */
+.main-container {
+  padding-top: var(--header-height);
+}
+
+/* Skills grid layout */
+.skills-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6;
+}
+
+.skill-card {
+  @apply bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2;
+}
+
+/* Project cards */
+.project-card {
+  @apply bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+}
+
+.project-image {
+  @apply h-48 w-full object-cover;
+}
+
+/* Work history timeline */
+.timeline {
+  @apply relative pl-10 border-l-2 border-primary-accent ml-4;
+}
+
+.timeline-item {
+  @apply relative mb-10;
+}
+
+.timeline-item::before {
+  content: '';
+  @apply absolute -left-[26px] top-0 w-6 h-6 rounded-full bg-primary-accent;
+}
+
+/* Responsive navigation */
+@media (max-width: 768px) {
+  .mobile-menu {
+    @apply fixed inset-0 bg-white dark:bg-primary-dark p-4 flex flex-col pt-20 z-40 transform transition-transform duration-300;
+  }
+
+  .mobile-menu.closed {
+    @apply -translate-x-full;
+  }
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+}
+</file>
+
+<file path="src/main.tsx">
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.css';
+
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Failed to find root element');
+}
+
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+);
+</file>
+
+<file path="src/vite-env.d.ts">
+/// <reference types="vite/client" />
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+</file>
+
+<file path="biome.json">
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": ["dist", ".next", "node_modules", "build"],
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedVariables": "off"
+      },
+      "nursery": {
+        "noImgElement": "off"
+      },
+      "a11y": {
+        "noAutofocus": "off",
+        "noDistractingElements": "off",
+        "noHeaderScope": "off",
+        "noInteractiveElementToNoninteractiveRole": "off",
+        "noLabelWithoutControl": "off",
+        "noNoninteractiveElementToInteractiveRole": "off",
+        "noNoninteractiveTabindex": "off",
+        "noPositiveTabindex": "off",
+        "noRedundantAlt": "off",
+        "noRedundantRoles": "off",
+        "noSvgWithoutTitle": "off",
+        "useAltText": "off",
+        "useKeyWithClickEvents": "off",
+        "useKeyWithMouseEvents": "off",
+        "useButtonType": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  }
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "react-vite-tailwind",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build --outDir dist",
+    "lint": "bunx biome lint --write && bunx tsc --noEmit",
+    "format": "bunx biome format --write",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@formspree/react": "^3.0.0",
+    "framer-motion": "^12.6.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.5.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@biomejs/biome": "1.9.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "globals": "^15.14.0",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.10",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.20.0",
+    "vite": "^6.0.5"
+  }
+}
+</file>
+
+<file path="postcss.config.js">
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+</file>
+
+<file path="README.md">
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
+
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
+</file>
+
+<file path="tailwind.config.js">
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: ["class"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+          dark: '#2c2c2f',
+          light: '#f7f7f7',
+          gray: '#949698',
+          accent: '#b0507f',
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+          light: '#c1c4c7',
+          orange: '#df8a29',
+          purple: '#c8a0dd',
+          yellow: '#ebda9a',
+          lavender: '#e6c4ef',
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        chart: {
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
+        },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
+      },
+      keyframes: {
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        'spin-slow': 'spin 3s linear infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          sm: '2rem',
+          lg: '4rem',
+          xl: '5rem',
+          '2xl': '6rem',
+        },
+        screens: {
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+          '2xl': '1536px',
+        },
+      },
+      fontFamily: {
+        sans: ['Open Sans', 'Noto Sans JP', 'sans-serif'],
+        heading: ['Open Sans', 'Noto Sans JP', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+};
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": true
+  },
+  "include": [
+    "src",
+    "vite.config.ts"
+  ]
+}
+</file>
+
+<file path="tsconfig.tsbuildinfo">
+eyJyb290IjpbIi4vc3JjL0FwcC50c3giLCIuL3NyYy9tYWluLnRzeCIsIi4vc3JjL3ZpdGUtZW52LmQudHMiLCIuL3NyYy9jb21wb25lbnRzL2xheW91dC9Gb290ZXIudHN4IiwiLi9zcmMvY29tcG9uZW50cy9sYXlvdXQvSGVhZGVyLnRzeCIsIi4vc3JjL2NvbXBvbmVudHMvbGF5b3V0L0xheW91dC50c3giLCIuL3NyYy9jb21wb25lbnRzL3NlY3Rpb25zL2hvbWUvQWJvdXRTZWN0aW9uLnRzeCIsIi4vc3JjL2NvbXBvbmVudHMvc2VjdGlvbnMvaG9tZS9Db250YWN0U2VjdGlvbi50c3giLCIuL3NyYy9jb21wb25lbnRzL3NlY3Rpb25zL2hvbWUvSGVyb1NlY3Rpb24udHN4IiwiLi9zcmMvY29tcG9uZW50cy9zZWN0aW9ucy9ob21lL1BvcnRmb2xpb1NlY3Rpb24udHN4IiwiLi9zcmMvY29tcG9uZW50cy9zZWN0aW9ucy9ob21lL1NraWxsc1NlY3Rpb24udHN4IiwiLi9zcmMvY29udGV4dC9UaGVtZUNvbnRleHQudHN4IiwiLi92aXRlLmNvbmZpZy50cyJdLCJ2ZXJzaW9uIjoiNS42LjMifQ==
+</file>
+
+<file path=".github/workflows/deploy.yml">
+name: Deploy to GitHub Pages
+
+# main ブランチへのプッシュ時にワークフローを実行
+on:
+  push:
+    branches:
+      - main # あなたのデフォルトブランチ名に合わせてください (main または master)
+
+# 環境変数を設定 (ビルドプロセスで PUBLIC_URL を使うため)
+env:
+  PUBLIC_URL: /my_portfolio # package.json の homepage のパス部分 (末尾のスラッシュは不要)
+
+# 実行するジョブを定義
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 実行環境として Ubuntu の最新版を使用
+
+    # GITHUB_TOKEN の権限を設定 (gh-pages ブランチへの書き込みに必要)
+    permissions:
+      contents: write
+
+    steps:
+      # ステップ1: リポジトリのコードをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v4 # 公式のアクションを使用
+
+      # ステップ2: Node.js 環境をセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # または '20' など、プロジェクトで使用しているバージョンを指定
+          cache: 'npm' # npm のキャッシュを有効にする
+
+      # ステップ3: 依存パッケージをインストール
+      # npm ci は package-lock.json に基づいて高速かつ確実にインストールします
+      - name: Install dependencies
+        run: npm ci
+
+      # ステップ4: アプリケーションをビルド
+      # PUBLIC_URL 環境変数がビルドプロセスで使われます
+      - name: Build application
+        run: npm run build
+
+      # ステップ5: GitHub Pages にデプロイ
+      # peaceiris/actions-gh-pages アクションがビルド結果を gh-pages ブランチにプッシュします
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # 自動的に提供されるトークンを使用
+          publish_dir: ./dist # デプロイするディレクトリ (ビルド結果)
+          # publish_branch: gh-pages # デプロイ先のブランチ名 (デフォルトは gh-pages)
+          # user_name: 'github-actions[bot]' # コミットするユーザー名 (オプション)
+          # user_email: 'github-actions[bot]@users.noreply.github.com' # コミットするメールアドレス (オプション)
+          # commit_message: 'Deploy to GitHub Pages' # コミットメッセージ (オプション)
+</file>
+
+<file path="src/components/sections/home/AboutSection.tsx">
+import { motion } from 'framer-motion';
+import { FiUser, FiBriefcase, FiCode, FiAward, FiTrendingUp } from 'react-icons/fi'; // アイコンを変更
+import profileImage from '/public/images/Profile.png'; // Import the profile image
+
+export default function AboutSection() {
+  return (
+    <section id="profile" className="py-20 bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4">
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          PROFILE
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start"> {/* items-startに変更 */}
+          {/* Profile Image Area */}
+          <motion.div
+            className="md:col-span-2 flex justify-center pt-4 md:pt-0" // 上部パディング調整
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="relative">
+              <div className="absolute -inset-2 bg-primary-accent bg-opacity-20 dark:bg-opacity-10 rounded-lg transform rotate-3" />
+              <div className="relative rounded-lg overflow-hidden shadow-xl bg-white dark:bg-gray-800 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+                <div className="aspect-square w-64 md:w-80 flex items-center justify-center bg-secondary-purple bg-opacity-20 dark:bg-opacity-40">
+                  <img src={profileImage} alt="的場 陵 プロフィール写真" className="w-full h-full object-cover" /> {/* Use the imported variable */}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Profile Details */}
+          <motion.div
+            className="md:col-span-3"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <div className="space-y-6">
+              {/* Profile Summary */}
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 mt-1">
+                  <FiUser className="text-primary-accent w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-1">的場 陵 (マトバ リョウ)</h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    経営学部 在学中のエンジニア志望 (27卒)。
+                    文系バックグラウンドから実践的な開発経験を積み重ね、技術で課題を解決することに情熱を燃やしています。
+                    特にバックエンド、インフラ、クラウド技術に関心があります。
+                  </p>
+                </div>
+              </div>
+
+              {/* Experience */}
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 mt-1">
+                  <FiBriefcase className="text-primary-accent w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-1">主な経験</h3>
+                  <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
+                    <li>Webアプリ開発インターン (要件定義〜デプロイ/単独開発)</li>
+                    <li>チーム開発ハッカソン (AWS活用/最優秀賞受賞)</li>
+                    <li>プログラミング教室 アルバイト</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Strengths */}
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 mt-1">
+                  <FiAward className="text-primary-accent w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-1">強み</h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    未知の領域にも臆せず飛び込む**主体性**と**行動力**。
+                    技術コミュニティへの参加やインターンを通じて、積極的に学び実践する**学習意欲**。
+                    ハッカソンやインターンでの経験から培った**課題解決能力**と**コミュニケーション能力**。
+                  </p>
+                </div>
+              </div>
+
+              {/* Future Goals */}
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 mt-1">
+                  <FiTrendingUp className="text-primary-accent w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-1">将来の目標</h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    技術力とビジネス視点を兼ね備えた**フルスタックエンジニア**を目指しています。
+                    将来的には、技術的な知見を活かしてプロジェクトをリードできる**プロダクトマネージャー**にも挑戦したいと考えています。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="src/components/sections/home/HeroSection.tsx">
+import { motion } from 'framer-motion';
+import { FiArrowDown } from 'react-icons/fi';
+import heroIcon from '/public/images/Icon.png'; // Import the icon image
+
+export default function HeroSection() {
+  return (
+    <section className="relative min-h-screen bg-primary-light dark:bg-primary-dark flex items-center">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary-gray opacity-5 dark:opacity-10 z-0 transform -skew-x-12" />
+      </div>
+
+      <div className="container mx-auto px-4 z-10 py-20">
+        <div className="flex flex-col md:flex-row items-center">
+          <motion.div
+            className="w-full md:w-2/3 mb-10 md:mb-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              <span className="block">Ryo Matoba</span>
+              <span className="text-primary-accent block mt-2">学生エンジニア</span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
+              経営学部からエンジニアリングの世界へ。ハッカソンでのチーム開発(AWS/最優秀賞)や、
+              就業型インターンでのWebアプリ単独開発(GCP/Docker/CI/CD)などを通して実践力を磨いています。
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#profile"
+                className="btn btn-primary"
+              >
+                プロフィール
+              </a>
+              <a
+                href="#portfolio"
+                className="btn btn-outline"
+              >
+                実績を見る
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="w-full md:w-1/3 flex justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="relative">
+              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-primary-accent bg-opacity-20 dark:bg-opacity-10 flex items-center justify-center">
+                <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-primary-accent bg-opacity-50 dark:bg-opacity-20 flex items-center justify-center">
+                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden border-4 border-white dark:border-gray-700">
+                    <img src={heroIcon} alt="アイコン" className="w-full h-full object-cover" /> {/* Use the imported variable */}
+                  </div>
+                </div>
+              </div>
+
+              <motion.div
+                className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 shadow-lg px-4 py-2 rounded-full"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, delay: 0.8 }}
+              >
+                <div className="flex items-center space-x-2">
+                  <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                  <span className="font-medium text-sm">Available for work</span>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
+      >
+        <a href="#profile" className="flex flex-col items-center text-gray-400 dark:text-gray-500 hover:text-primary-accent dark:hover:text-primary-accent transition-colors">
+          <span className="text-sm mb-2">スクロール</span>
+          <FiArrowDown size={24} />
+        </a>
+      </motion.div>
+    </section>
+  );
+}
+</file>
+
+<file path="index.html">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
+</file>
+
+<file path="vite.config.ts">
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+// https://vite.dev/config/
+export default defineConfig({
+	plugins: [react()],
+	base: "/my_portfolio/",
+});
+</file>
+
+<file path="src/data/projects.ts">
+import hackathonThumbnail from '/public/images/hackathon_thumbnail.png';
+import portfolioSiteThumb from '/public/images/portfolio-site-thumb.png';
+
+
+// プロジェクトデータの型定義
+export interface Project {
+    id: string;
+    title: string;
+    description: string; // カード用
+    image?: string;
+    tags: string[];
+    // 詳細ページ用
+    longDescription?: string;
+    features?: string[];
+    problem?: string;
+    solution?: string;
+    techStackDetails?: string[];
+    architectureDiagramUrl?: string;
+    githubUrl?: string;
+    demoUrl?: string;
+  }
+  
+  // プロジェクトデータの配列をエクスポート
+  export const projectsData: Project[] = [ // 変数名を projectsData に変更（任意）
+    {
+      id: 'tsundoku-app',
+      title: 'ツンドク娘 (ハッカソン)',
+      description: '本のJANコードから「ツンドク娘」を召喚！会話やクイズで楽しく積読解消をサポート。AWS活用。',
+      image: hackathonThumbnail,
+      tags: ['チーム開発', 'AWS', 'サーバーレス', 'React', '最優秀賞'],
+      githubUrl: 'https://github.com/study-basic/team-book-battler',
+      longDescription: '「積読を楽しく解消したい」という課題に対し、本のJANコードを読み取るとキャラクター（ツンドク娘）が現れ、その本に関するインタラクション（会話、クイズ、バトル）ができるWebアプリケーションを開発しました。チーム4名（私以外は現役エンジニア）で1ヶ月という短期間でアイデアから実装、発表まで完遂し、ハッカソンで最優秀賞を受賞しました。',
+      features: ['JANコード読み取りによる書籍情報取得', 'キャラクターとの対話機能', '書籍に関するクイズ・バトル機能', '積読リスト管理'],
+      problem: '一般的な読書管理アプリは存在するが、「積読」の解消に特化し、かつゲーム性を持たせたものは少ない。',
+      solution: 'キャラクターとのインタラクションを通じて、積読本への関心を高め、楽しみながら読書を促す体験を提供。',
+      techStackDetails: ['AWS Lambda (Python)', 'Amazon DynamoDB', 'Amazon API Gateway', 'React', 'JavaScript'],
+    },
+    {
+       id: 'intern-dx-app',
+       title: 'DX事業部向けWebアプリ (インターン)',
+       description: '対話形式でSEOに配慮した高品質な記事を段階的に生成。時間短縮と品質向上を実現する企業向けツール。',
+       image: undefined, // Set back to undefined as the image file is missing
+       tags: ['企業向け', 'GCP', 'Docker', 'CI/CD', 'フルスタック', 'AI活用', '業務効率化', 'SEO',],
+       longDescription: `就業型インターンとして、企業向けのAIを活用した記事生成支援ツールを開発しました。記事作成にかかる時間と労力を削減し、SEOに強く品質の高いコンテンツ生成を支援することを目的としています。ユーザーは対話形式でAIとやり取りしながら、キーワード選定、構成案作成、本文執筆、画像生成といった記事作成プロセスを段階的に進めることができます。このツールにより、コンテンツマーケティング業務の効率化と質的向上に貢献します。`,
+       features: ['ユーザー認証', 'データ登録・編集・削除機能', '業務データ可視化ダッシュボード', '外部API連携'],
+       problem: '高品質でSEOに配慮した記事コンテンツの作成には、専門知識と多くの時間が必要であり、特にリソースが限られる場合に大きな負担となる。また、アイデア出しや構成作成の段階で停滞しやすい。', 
+       solution: 'AIとの対話形式インターフェースを提供し、ユーザーの入力や選択に基づいてAIが段階的に記事を生成することで、専門知識が少ないユーザーでも効率的に高品質な記事を作成可能にする。SEO要素もプロンプトに組み込み、自然な形で対策を行う。', 
+       techStackDetails: ['大規模言語モデルAPI (OpenAI API, Google Gemini APIなど)','GCP(Cloud Run, SQL, Storage, Firebase Auth)', 'Docker', 'GitHub Actions (CI/CD)', 'React', 'Python/Flask', 'MySQL'],
+    },
+    {
+       id: 'portfolio-site',
+       title: 'ポートフォリオサイト ',
+       description: 'React, TypeScript, Tailwind CSSで構築した自身のポートフォリオサイト。レスポンシブ、ダークモード対応。',
+       image: portfolioSiteThumb,
+       tags: ['個人開発', 'React', 'TypeScript', 'TailwindCSS', 'Netlify'],
+       githubUrl: 'https://github.com/ryomatoba/my_portfolio',
+       longDescription: '自身のスキルや制作実績を紹介するために、React, TypeScript, Tailwind CSSを用いて開発したポートフォリオサイトです。Framer Motionによるアニメーション、ダークモード切り替え機能、レスポンシブデザインを実装し、github actions, github pagesでCI/CD構築しています。',
+       features: ['プロジェクト紹介', 'スキル一覧表示', 'プロフィール表示', 'お問い合わせフォーム連携(予定)', 'ダークモード対応', 'レスポンシブデザイン', 'アニメーション効果'],
+       techStackDetails: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'react-router-dom', 'react-icons', 'Netlify'],
+    },
+  ];
+</file>
+
+</files>
