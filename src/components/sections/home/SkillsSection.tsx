@@ -57,7 +57,7 @@ export default function SkillsSection() {
   const backendSkills = [
     { icon: <FaPython />, title: 'Python', detail: 'FlaskでのWeb API開発、AWS Lambda関数開発に使用' },
     { icon: <SiFlask />, title: 'Flask', detail: 'インターンでのWebアプリケーションバックエンド開発' },
-    { icon: <FaJava />, title: 'Java', detail: '授業や基本情報技術者試験での学習経験' },
+    { icon: <FaJava />, title: 'Java', detail: 'Udemyや基本情報技術者試験での学習経験' },
     { icon: <FaDatabase />, title: 'Database', detail: 'SQL (MySQL/Cloud SQL), NoSQL (DynamoDB)' },
   ];
 
@@ -66,7 +66,7 @@ export default function SkillsSection() {
     { icon: <FaJsSquare />, title: 'JavaScript', detail: 'ES6+構文、非同期処理、DOM操作' },
     { icon: <SiTypescript />, title: 'TypeScript', detail: '基本的な型定義、Reactとの組み合わせ学習中' },
     { icon: <FaHtml5 />, title: 'HTML5', detail: 'セマンティックマークアップ、アクセシビリティ考慮' },
-    { icon: <FaCss3Alt />, title: 'CSS3', detail: 'Tailwind CSS, Flexbox/Gridレイアウト, レスポンシブデザイン' },
+    { icon: <FaCss3Alt />, title: 'CSS3', detail: 'Tailwind CSS, レスポンシブデザイン' },
   ];
 
   const infraCloudSkills = [

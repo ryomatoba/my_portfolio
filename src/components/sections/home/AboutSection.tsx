@@ -67,7 +67,7 @@ export default function AboutSection() {
                 <div>
                   <h3 className="text-xl font-bold mb-1">主な経験</h3>
                   <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
-                    <li>Webアプリ開発インターン (要件定義〜デプロイ/単独開発)</li>
+                    <li>Webアプリ開発インターン (要件定義〜デプロイ/)</li>
                     <li>チーム開発ハッカソン (AWS活用/最優秀賞受賞)</li>
                     <li>プログラミング教室 アルバイト</li>
                   </ul>
