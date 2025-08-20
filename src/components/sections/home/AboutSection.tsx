@@ -52,9 +52,7 @@ export default function AboutSection() {
                 <div>
                   <h3 className="text-xl font-bold mb-1">的場 陵 (マトバ リョウ)</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    経営学部 在学中のエンジニア志望 (27卒)。
-                    文系バックグラウンドから実践的な開発経験を積み重ね、技術で課題を解決することに情熱を燃やしています。
-                    特にバックエンド、インフラ、クラウド技術に関心があります。
+                  経営学部で学びながら、技術による課題解決に魅了されたエンジニア (27卒) です。実体験で感じた「不便」を解消したいという思いを原動力に、就業型インターンでの開発や、ハッカソンでのチーム開発を通じて、実践的な開発スキルを磨いてきました。特にバックエンド、インフラ、クラウド技術に強い関心を持っています。
                   </p>
                 </div>
               </div>
@@ -67,8 +65,9 @@ export default function AboutSection() {
                 <div>
                   <h3 className="text-xl font-bold mb-1">主な経験</h3>
                   <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
-                    <li>Webアプリ開発インターン (要件定義〜デプロイ/)</li>
-                    <li>チーム開発ハッカソン (AWS活用/最優秀賞受賞)</li>
+                    <li>Webアプリ開発インターン</li>
+                    <li>RAGアプリ開発インターン</li>
+                    <li>チーム開発ハッカソン</li>
                     <li>プログラミング教室 アルバイト</li>
                   </ul>
                 </div>
@@ -82,9 +81,7 @@ export default function AboutSection() {
                 <div>
                   <h3 className="text-xl font-bold mb-1">強み</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    未知の領域にも臆せず飛び込む**主体性**と**行動力**。
-                    技術コミュニティへの参加やインターンを通じて、積極的に学び実践する**学習意欲**。
-                    ハッカソンやインターンでの経験から培った**課題解決能力**と**コミュニケーション能力**。
+                    実践の中で貪欲に学び続ける主体性が強みです。文系という背景だからこそ、常にハングリー精神を持って挑戦し続けています。
                   </p>
                 </div>
               </div>
@@ -95,10 +92,13 @@ export default function AboutSection() {
                   <FiTrendingUp className="text-primary-accent w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-1">将来の目標</h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Webアプリケーションの安定稼働とスケーラビリティを支えるインフラストラクチャの設計・構築に強い関心があり、SRE（Site Reliability Engineering）やクラウドネイティブ技術（マイクロサービスアーキテクチャ、マルチテナント設計など）における専門性を高めたいと考えています。将来的には、これらの深い技術的知見を基盤とし、ビジネス価値を最大化するシステム全体を俯瞰できる技術者として成長し、チームが効率的かつ創造的に開発に取り組める環境を構築できるリーダーになることを目指しています。そして、技術を通じて企業の持続的な成長と価値向上に貢献していきたいです。
-                  </p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  <strong>【短中期目標】</strong>
+                  まずは、フロントエンド・バックエンド両面の専門性を高め、ユーザーに最高の体験を届けるための技術的基盤を固めます。
+                  <br /><br />
+                  <strong>【長期目標】</strong>
+                  将来的には、その技術的基盤を土台に、よりユーザーに近い立場でプロダクト全体の価値を最大化できるエンジニアを目指します。ユーザーの課題を誰よりも深く理解し、技術とビジネスの両視点から本質的な解決策を提案・実装することで、事業の成長に貢献していきたいです。
+                </p>
                 </div>
               </div>
             </div>

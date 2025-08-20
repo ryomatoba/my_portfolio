@@ -52,14 +52,9 @@ export default function PortfolioDetail() {
 
       {/* External Links */}
       <div className="flex flex-wrap gap-4 mb-8">
-        {githubUrl && (
-          <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline flex items-center text-sm">
-            <FiGithub className="mr-2" /> GitHub Repository
-          </a>
-        )}
         {demoUrl && (
           <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline flex items-center text-sm">
-            <FiExternalLink className="mr-2" /> Live Demo
+            <FiExternalLink className="mr-2" /> アプリを開く
           </a>
         )}
       </div>

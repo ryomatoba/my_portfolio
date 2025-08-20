@@ -23,8 +23,8 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
-              経営学部からエンジニアリングの世界へ。ハッカソンでのチーム開発(AWS/最優秀賞)や、
-              就業型インターンでのWebアプリ単独開発(GCP/Docker/CI/CD)などを通して実践力を磨いています。
+              経営学部からエンジニアリングの世界へ。ハッカソンでのチーム開発や、
+              就業型インターンでのWebアプリ開発などを通して実践力を磨いています。
             </p>
 
             <div className="flex flex-wrap gap-4">

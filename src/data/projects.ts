@@ -1,6 +1,6 @@
 import hackathonThumbnail from '/public/images/hackathon_thumbnail.png';
 import portfolioSiteThumb from '/public/images/portfolio-site-thumb.png';
-
+import metadata from '/public/images/metadata.png';
 
 // プロジェクトデータの型定義
 export interface Project {
@@ -28,7 +28,7 @@ export interface Project {
       description: '本のJANコードから「ツンドク娘」を召喚！会話やクイズで楽しく積読解消をサポート。AWS活用。',
       image: hackathonThumbnail,
       tags: ['チーム開発', 'AWS', 'サーバーレス', 'React', '最優秀賞'],
-      githubUrl: 'https://github.com/study-basic/team-book-battler',
+      demoUrl: 'https://main.dchkbwiyhhnk.amplifyapp.com',
       longDescription: '「積読を楽しく解消したい」という課題に対し、本のJANコードを読み取るとキャラクター（ツンドク娘）が現れ、その本に関するインタラクション（会話、クイズ、バトル）ができるWebアプリケーションを開発しました。チーム4名（私以外は現役エンジニア）で1ヶ月という短期間でアイデアから実装、発表まで完遂し、ハッカソンで最優秀賞を受賞しました。',
       features: ['JANコード読み取りによる書籍情報取得', 'キャラクターとの対話機能', '書籍に関するクイズ・バトル機能', '積読リスト管理'],
       problem: '一般的な読書管理アプリは存在するが、「積読」の解消に特化し、かつゲーム性を持たせたものは少ない。',
@@ -37,7 +37,7 @@ export interface Project {
     },
     {
        id: 'intern-dx-app',
-       title: 'DX事業部向けWebアプリ (インターン)',
+       title: '記事生成Webアプリ (インターン)',
        description: '対話形式でSEOに配慮した高品質な記事を段階的に生成。時間短縮と品質向上を実現する企業向けツール。',
        image: undefined, // Set back to undefined as the image file is missing
        tags: ['企業向け', 'GCP', 'Docker', 'CI/CD', 'フルスタック', 'AI活用', '業務効率化', 'SEO',],
@@ -47,6 +47,28 @@ export interface Project {
        solution: 'AIとの対話形式インターフェースを提供し、ユーザーの入力や選択に基づいてAIが段階的に記事を生成することで、専門知識が少ないユーザーでも効率的に高品質な記事を作成可能にする。SEO要素もプロンプトに組み込み、自然な形で対策を行う。', 
        techStackDetails: ['大規模言語モデルAPI (OpenAI API, Google Gemini APIなど)','GCP(Cloud Run, SQL, Storage, Firebase Auth)', 'Docker', 'GitHub Actions (CI/CD)', 'React', 'Python/Flask', 'MySQL'],
     },
+    {
+       id: 'chatbrid-intern',
+       title: 'ChatBrid (インターン)',
+       description: '社内知識やローカル情報を学習し、ChatGPTと連携して当意即妙に回答する完全ノーコードRAG製品。',
+       image: metadata,
+       tags: ['インターン', 'RAG', 'LLM', 'ノーコード', 'Slack連携', 'オンプレミス', 'セキュリティ'],
+       longDescription: 'ChatBridは、独自の特許技術により多彩で大規模な文書を取り込んでも90%超水準の高精度を達成する「速い」「安い」「巧い」を実現した完全ノーコードRAG(検索拡張生成)製品です。社内のローカル知識をQ&A形式やマニュアル（Markdown等）として登録し、独自の自然言語処理で選別した情報をチャットAPIに送出することで、ChatGPTが社内知識に準拠した回答を当意即妙に返します。役職・部署に応じた権限制御、オンプレミス構成、ローカルLLMへの切替(BCP)にも対応します。',
+       features: [
+         '社内知識/ローカル情報から関連度の高い情報のみを選別しLLMに送出',
+         '社内知識のみでの回答モードとChatGPTとのハイブリッド回答',
+         'Q&A編集とGUIでのナレッジ登録（Markdown大量貼り付け対応）',
+         'ビジュアル類似検索と関連質問提示で評価・チューニングが容易',
+         '役職・部署などに応じたアクセス権限制御',
+         'Slack/Teams/LINEなど社内チャットからの一元対応',
+         '有害投稿排除/フィルタリング、プロンプト補完・独自プロンプト',
+         'ChatGPT呼び出し閾値調整、BCPとして他LLMへのホットスイッチ',
+         'オンプレミス対応（ローカルLLM/ベクトルストレージ含む）'
+       ],
+       problem: '社内や組織内に散在するローカル知識は外部LLMからはアクセスできず、問い合わせ対応の属人化や検索コスト増大、セキュリティ上の懸念がある。',
+       solution: 'ノーコードで社内知識を高速に取り込み、権限制御と高精度検索で適切なコンテキストだけをLLMに送出。独自NLPとハイブリッド対話機能により、高精度・高セキュリティかつ運用容易な回答体験を実現。オンプレミス/ローカルLLMとBCP切替で安全性と可用性も担保。',
+       techStackDetails: ['RAG(ベクトルストレージ/Embedding/Retriever)', '独自日本語辞書・NLPツール群', 'LLM(OpenAI/Google/Anthropic/ローカルLLM)', 'Slack/Teams/LINE連携', '権限ベースのアクセス制御', 'オンプレミス対応とホットスイッチBCP', 'miibo連携(option)'],
+     },
     {
        id: 'portfolio-site',
        title: 'ポートフォリオサイト ',
